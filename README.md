@@ -1,1 +1,1 @@
-"# Event Management API" 
+# Event Management API 

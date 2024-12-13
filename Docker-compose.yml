@@ -1,0 +1,42 @@
+
+services:
+  event:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py migrate && 
+              python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./:/app
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:  "celery -A event_management worker -E -l info -n worker_event_%n "
+    volumes:
+      - ./:/app
+    depends_on:
+      - event
+      - redis
+    restart: on-failure
+
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5555:5555"
+    environment:
+      - FLOWER_UNAUTHENTICATED_API=true # Flower API access
+    command: "celery -A event_management flower --address=0.0.0.0"
+    depends_on:
+      - redis
+      - celery

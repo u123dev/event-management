@@ -1,8 +1,6 @@
 # Event Management API 
 
-Event Management service RESTful API is based on Django REST Framework and suitable for managing events (like conferences, meetups, etc.).
-Managing instances of books, tracking book borrowings for fee, payments accounting and support payment sessions - 
-make the service much more user-friendly.
+Event Management service RESTful API is based on Django REST Framework and suitable for managing events (like conferences, meetups, etc.)
 
 The application allows users to create, view, update and delete events. It should also handle user registrations & unregistration 
 for these events.

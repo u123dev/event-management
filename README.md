@@ -23,7 +23,7 @@ for these events.
 ___
 ### Tech Stack & System requirements :
 
-* Python 3.+
+* Python 3.12
 * Django 5.+ 
 * Django Rest Framework (DRF) 3.+ 
 * JWT Token Authentication
@@ -91,7 +91,7 @@ py manage.py runserver
 ### Run with Docker containers
  System requirements:
 
-* **Docker Desktop 4.+**
+* **Docker Desktop 4.+ / Docker Compose**
 
 Run project:
 ```

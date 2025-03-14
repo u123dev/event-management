@@ -113,6 +113,7 @@ class EventViewSet(viewsets.ModelViewSet):
         subject = "You have successfully registered."
         message = (f"Add {self.request.user.email} to event: {event.title} | {event.location} "
                    f"at {event.date.strftime('%d/%m/%Y')}")
+        print(f"To: {self.request.user.email} Subject: {subject}: |Message: {message}")
         send_notification.delay(subject, message, None, self.request.user.email)
         return Response({"detail": message}, status=status.HTTP_201_CREATED, )
 
@@ -124,5 +125,6 @@ class EventViewSet(viewsets.ModelViewSet):
         subject = "You have unregistered."
         message = (f"Remove {self.request.user.email} from event: {event.title} | {event.location} "
                    f"at {event.date.strftime('%d/%m/%Y')}")
+        print(f"To: {self.request.user.email} Subject: {subject}: |Message: {message}")
         send_notification.delay(subject, message, None, self.request.user.email)
         return Response({"detail": message}, status=status.HTTP_204_NO_CONTENT, )
